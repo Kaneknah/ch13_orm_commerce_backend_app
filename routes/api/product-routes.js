@@ -4,61 +4,54 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 // The `/api/products` endpoint
 
 // get all products
-router.get("/", (req, res) => {
-	  try {
-    const productData = await Product.findAll({
-		include: [
-			{model: Category},
-			{model: Tag},
-		],
-	  });
-    res.status(200).json(productData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get("/", async (req, res) => {
+	try {
+		const productData = await Product.findAll({
+			include: [{ model: Category }, { model: Tag }],
+		});
+		res.status(200).json(productData);
+	} catch (err) {
+		res.status(500).json(err);
+	}
 });
-	// find all products
-	// be sure to include its associated Category and Tag data
-
+// find all products
+// be sure to include its associated Category and Tag data
 
 // get one product
-router.get("/:id", (req, res) => {
-		try {
-    const productData = await Product.findByPk(req.params.id, {
-      
-      include: [
-		{ model:Category},
-		{model: Tag},
-	  ],
-    });
+router.get("/:id", async (req, res) => {
+	try {
+		const productData = await Product.findByPk(req.params.id, {
+			include: [
+				{ model: Category, attributes: ["id", "category_name"] },
+				{ model: Tag, attributes: ["id", "tag_name"] },
+			],
+		});
 
-    if (!productData) {
-      res.status(404).json({ message: 'No products found with this id!' });
-      return;
-    }
+		if (!productData) {
+			res.status(404).json({ message: "No products found with this id!" });
+			return;
+		}
 
-    res.status(200).json(travellerData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+		res.status(200).json(productData);
+	} catch (err) {
+		res.status(500).json(err);
+	}
 
-      // JOIN with locations, using the Trip through table
-      
-    });
-	// find a single product by its `id`
-	// be sure to include its associated Category and Tag data
-
+	// JOIN with locations, using the Trip through table
+});
+// find a single product by its `id`
+// be sure to include its associated Category and Tag data
 
 // create new product
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
 	try {
-    const productData = await Product.create(req.body);
-    res.status(200).json(productData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+		const productData = await Product.create(req.body);
+		res.status(200).json(productData);
+	} catch (err) {
+		res.status(400).json(err);
+	}
 });
-	/* req.body should look like this...
+/* req.body should look like this...
     {
       product_name: "Basketball",
       price: 200.00,
@@ -66,6 +59,7 @@ router.post("/", (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
+router.post("/", async (req, res) => {
 	Product.create(req.body)
 		.then((product) => {
 			// if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -87,7 +81,6 @@ router.post("/", (req, res) => {
 			res.status(400).json(err);
 		});
 });
-
 // update product
 router.put("/:id", (req, res) => {
 	// update product data
