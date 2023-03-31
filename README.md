@@ -13,7 +13,8 @@
 
 ## Description
 
-This project was the creation of application that simulates the back end of a Ecommerce website. The application utilizes MySQL2 created databases through Sequelize interactions. The application allows for a user to view, create, update, and delete products, categories, and tags related to sales items on the Ecommerce website. The application can not be seen on a static webpage so a walkthrough video has been created to show functionality. (Video Link)
+This project was the creation of application that simulates the back end of a Ecommerce website. The application utilizes MySQL2 created databases through Sequelize interactions. The application allows for a user to view, create, update, and delete products, categories, and tags related to sales items on the Ecommerce website. The application can not be seen on a static webpage so a walkthrough video has been created to show functionality. (
+"https://drive.google.com/file/d/18dh1ulniPZCRrjgIsKk4EInRKEC3P0_i/preview")
 
 ## Acceptance Criteria
 
@@ -34,6 +35,8 @@ THEN I am able to successfully create, update, and delete data in my database<br
 A user will need to instal the package.json modules in order to run this application. The user may do this by simply running "npm i" in the terminal. The user will also need to instal the mySQL by running "mysql -uroot -p" and entering their SQL password. The user would then need to run the schema by entering "SOURCE ./sql/schema.sql;". finally the User would have to run the seeds in order for the application to work. This is done by entering "SOURCE ./sql/seeds/sql;"
 
 ## Usage
+
+![Alt text](./assets/images/Screenshot%202023-03-30%20190509.png)
 
 The user will begin the application by entering "npm start" in the terminal. the user will then need to utilize the insomnia application to perform the required GET, POST, and PUT functions. this is done my navigating to the Insomnia desktop application and and entering in localHost URL addresses to perform the below functions. <br>
 
